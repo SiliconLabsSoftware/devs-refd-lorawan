@@ -60,7 +60,8 @@ jobs:
     - name: Apply custom formatting configuration
       run: |
         echo "Applying custom formatting configuration..."
-        cp "./.github/formatting_config/.pre-commit-config.yaml" "./.github/coding-convention-tool/.pre-commit-config.yaml"
+        chmod +x ./.github/coding-convention-tool/project_custom_config_handler.sh
+        ./.github/coding-convention-tool/project_custom_config_handler.sh
     - name: Run test
       run: |
         pre-commit install --config .github/coding-convention-tool/.pre-commit-config.yaml
@@ -73,13 +74,13 @@ jobs:
       with:
         name: CodingConventionResult
         path: CodingConventionTool.txt
-        retention-days: 90
+        retention-days: 10
     - name: Upload Patch
       uses: actions/upload-artifact@v4.3.4
       with:
         name: code-fix.patch
         path: code-fix.patch
-        retention-days: 90
+        retention-days: 10
     - name: Check log file to set status of the job
       run: |
         keywords=("Failed")

@@ -1,0 +1,25 @@
+exclude: '.*\/build\/.*|.*\/gecko_sdk.*/.*|.*\/autogen\/.*|.*simplicity.*/.*|.*\/config\/.*|.*\.slcp|.*\.slps|.*\.mak|.*\.github'
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: ["--markdown-linebreak-ext=md"]
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.4
+    hooks:
+      - id: codespell
+        args: [-w, --config, ./.codespell/.codespellrc,"--skip=*.cmake"]
+  - repo: https://github.com/pocc/pre-commit-hooks
+    rev: v1.3.5
+    hooks:
+      - id: uncrustify
+        args: [-c, ./.github/coding-convention-tool/tools/uncrustify/uncrustify.cfg, -lC, --no-backup, --replace]
+      - id: clang-tidy
+        args:
+          - --config-file=./.clang-tidy
+          - --use-color
+          - --extra-arg=-I/inc
+          - --header-filter:'^((?!test).)*$'
+          - -p=../projects/lorawan_extension/components/lbm_applications/4_porting_efr32/build_sx1262_brd4400c
