@@ -1,0 +1,22 @@
+id: lbm_stream
+label: LoRa Basic Modem Stream Support
+package: lbm
+description: Stream packages support (ROSE/Stream)
+category: Third Party|LoRaWAN|LBM Features
+quality: experimental
+
+root_path: "components/SWL2001/lbm_lib"
+
+requires:
+  - name: lbm_lib
+
+define:
+  - name: ADD_SMTC_STREAM
+
+source:
+  - path: smtc_modem_core/modem_services/stream_packages/rose.c
+  - path: smtc_modem_core/modem_services/stream_packages/stream.c
+
+include:
+  - path: smtc_modem_core/modem_services
+  - path: smtc_modem_core/modem_services/stream_packages

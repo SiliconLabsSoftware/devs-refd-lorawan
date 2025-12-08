@@ -1,0 +1,35 @@
+id: lbm_radio_hal
+label: LoRa Basic Modem Radio HAL
+package: lorawan_extension
+description: >
+  The LoRa Basic Modem depends on Semtech's radio driver, which, in turn, requires a radio driver HAL implementation.
+  A brief description of the necessary steps for this implementation follows.
+  The HAL implementation must provide platform-specific read, write, reset, and wake-up implementations.
+category: LBM HAL
+quality: experimental
+root_path: "components/lbm_applications/4_porting_efr32/radio_hal"
+
+source:
+  - path: sx126x_hal.c
+  - path: radio_utilities.c
+  - path: ral_sx126x_bsp.c
+include:
+  - path: .
+    file_list:
+    - path: radio_utilities.h
+requires:
+  - name: spidrv_eusart
+    condition: [device_has_eusart]
+  - name: lbm_board_config
+  - name: component_catalog
+
+provides:
+  - name: lbm_radio_hal
+
+recommends:
+  - id: spidrv_eusart
+    instance: [radio]
+    condition: [device_has_eusart]
+  - id: spidrv_usart
+    instance: [radio]
+    unless: [device_has_eusart]

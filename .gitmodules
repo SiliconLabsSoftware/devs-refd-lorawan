@@ -1,3 +1,8 @@
 [submodule ".github/coding-convention-tool"]
 	path = .github/coding-convention-tool
 	url = https://github.com/SiliconLabsSoftware/coding-convention-tool.git
+
+[submodule "projects/lorawan_extension/components/SWL2001"]
+	path = projects/lorawan_extension/components/SWL2001
+	url = git@github.com:Lora-net/SWL2001.git
+	branch = v4.8.0

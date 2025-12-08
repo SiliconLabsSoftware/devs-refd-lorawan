@@ -1,0 +1,51 @@
+project_name: radio_hal_unit_tests
+package: platform
+quality: production
+label: Radio HAL unit test
+description: "This project contains unit test for the Radio HAL."
+category: Example|LoraWAN
+sdk: 
+  id: simplicity_sdk
+  version: 2025.6.0
+sdk_extension:
+- {id: lorawan_extension, version: 1.0.0}
+
+source:
+- {path: app.c}
+- {path: app.h}
+- {path: sl_lbm_radio_hal_test_runner.c}
+- {path: sl_lbm_radio_hal_test_runner.h}
+- {path: test_sl_lbm_radio_hal.c}
+- {path: test_sl_lbm_radio_hal.h}
+
+component:
+- {from: lorawan_extension, id: lbm_lib}
+- {from: lorawan_extension, id: lbm_region_eu868}
+- {from: lorawan_extension, id: lbm_sx1262}
+- {from: lorawan_extension, id: lbm_radio_hal}
+- {from: lorawan_extension, id: lbm_hal}
+- {id: app_log}
+- {id: clock_manager}
+- {id: device_init}
+- {id: iostream_recommended_stream}
+- {id: iostream_retarget_stdio}
+- {id: iostream_stdlib_config}
+- instance: [led0, led1]
+  id: simple_led
+- {id: sl_main}
+- {id: sleeptimer}
+- {id: test_framework_unity}
+
+requires:
+  - name: iostream_retarget_stdio
+define:
+  - name: DEBUG_EFM
+readme:
+  - path: README.md
+ui_hints:
+  highlight:
+  - {path: README.md, focus: true}
+
+configuration:
+  - name: SL_BOARD_ENABLE_VCOM
+    value: "1"

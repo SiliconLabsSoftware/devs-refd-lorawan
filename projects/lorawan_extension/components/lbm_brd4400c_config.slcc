@@ -1,0 +1,27 @@
+!!omap
+- id: lbm_brd4400c_config
+- label: lbm brd4400c config
+- description: Configuration files for BRD4400C
+- package: boards
+- category: LBM HAL
+- quality: experimental
+- metadata:
+    sbom:
+      license: Zlib
+- ui_hints:
+    visibility: never
+- root_path: components/lbm_applications/4_porting_efr32/mcu_drivers/board/brd4400c
+- provides:
+  - name: lbm_brd4400c_config
+- config_file:
+  - override:
+      component: spidrv_eusart
+      file_id: spidrv_eusart_config
+      instance: radio
+    path: config/sl_spidrv_eusart_radio_config.h
+  - path: config/smtc_config.h
+- template_contribution:
+  - name: component_catalog
+    value: lbm_radio_eusart
+- requires:
+  - name: lbm_hw_crypto

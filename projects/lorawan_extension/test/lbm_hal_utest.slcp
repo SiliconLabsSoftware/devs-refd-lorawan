@@ -1,0 +1,97 @@
+project_name: lbm_hal_utest
+package: platform
+quality: experimental
+label: Lora Basic Modem HAL unit test
+description: "This project contains unit test for the Lora Basic Modem HAL."
+category: Example|LoraWAN
+sdk:
+  id: simplicity_sdk
+  version: 2025.6.0
+sdk_extension:
+- {id: lorawan_extension, version: 1.0.0}
+
+source:
+  - path: app.c
+  - path: app.h
+  - path: sl_lbm_hal_test_runner.c
+  - path: sl_lbm_hal_test_runner.h
+  - path: test_sl_lbm_hal_lp_timer/test_sl_lbm_hal_lp_timer.c
+  - path: test_sl_lbm_hal_rtc/test_sl_lbm_hal_rtc.c
+  - path: test_sl_lbm_hal_watchdog/test_sl_lbm_hal_watchdog.c
+  - path: test_sl_lbm_hal_crashlog/test_sl_lbm_hal_crashlog.c
+  - path: test_sl_lbm_hal_gpio/test_sl_lbm_hal_gpio.c
+  - path: test_sl_lbm_hal_context/test_sl_lbm_hal_context.c
+  - path: test_sl_lbm_hal_rng/test_sl_lbm_hal_rng.c
+  - path: test_sl_lbm_hal_iadc/test_sl_lbm_hal_iadc.c
+
+include:
+  - path: test_sl_lbm_hal_lp_timer
+    file_list:
+      - path: test_sl_lbm_hal_lp_timer.h
+  - path: test_sl_lbm_hal_rtc
+    file_list:
+      - path: test_sl_lbm_hal_rtc.h
+  - path: test_sl_lbm_hal_watchdog
+    file_list:
+      - path: test_sl_lbm_hal_watchdog.h
+  - path: test_sl_lbm_hal_crashlog
+    file_list:
+      - path: test_sl_lbm_hal_crashlog.h
+  - path: test_sl_lbm_hal_gpio
+    file_list:
+      - path: test_sl_lbm_hal_gpio.h
+  - path: test_sl_lbm_hal_context
+    file_list:
+      - path: test_sl_lbm_hal_context.h
+  - path: test_sl_lbm_hal_rng
+    file_list:
+      - path: test_sl_lbm_hal_rng.h
+  - path: test_sl_lbm_hal_iadc
+    file_list:
+      - path: test_sl_lbm_hal_iadc.h
+
+component:
+  - {from: lorawan_extension, id: lbm_board_config}
+  - {from: lorawan_extension, id: lbm_hal}
+  - {from: lorawan_extension, id: lbm_lib}
+  - {from: lorawan_extension, id: lbm_radio_hal}
+  - {from: lorawan_extension, id: lbm_region_eu868}
+  - {from: lorawan_extension, id: lbm_sx1262}
+  - {id: EFR32ZG28B312F1024IM68}
+  - {id: app_log}
+  - {id: brd4400c}
+  - {id: clock_manager}
+  - {id: device_init}
+  - {id: iostream_recommended_stream}
+  - {id: iostream_retarget_stdio}
+  - {id: iostream_stdlib_config}
+  - {id: power_manager}
+  - instance: [led0, led1]
+    id: simple_led
+  - {id: emlib_rmu}
+  - {id: sl_main}
+  - {id: sleeptimer}
+  - {id: test_framework_unity}
+
+requires:
+  - name: iostream_retarget_stdio
+
+define:
+  - name: DEBUG_EFM
+  - name: USE_FLASH_READ_MODIFY_WRITE
+  - name: MULTISTACK
+readme:
+  - path: README.md
+ui_hints:
+  highlight: README.md
+
+configuration:
+  - name: SL_BOARD_ENABLE_VCOM
+    value: "1"
+  - name: SL_SLEEPTIMER_PERIPHERAL
+    value: "SL_SLEEPTIMER_PERIPHERAL_BURTC"
+  - name: SL_POWER_MANAGER_DEBUG
+    value: "1"
+  - name: SL_CLOCK_MANAGER_WDOG0CLK_SOURCE
+    value: "CMU_WDOG0CLKCTRL_CLKSEL_ULFRCO"
+

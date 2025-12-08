@@ -1,0 +1,14 @@
+id: lorawan_extension
+label: LoraWAN extension
+description: >
+  LoraWAN extension for Series 2 devices.
+  This extension provides support for LoraWAN communication on Series 2 devices using SX126x transceiver.
+version: 1.0.0
+sdk:
+  id: simplicity_sdk
+  version: 2025.6.0
+component_path:
+- path: components/lbm_hal
+- path: components/lbm_hal/config
+- path: components/lbm_radio_hal
+- path: components/

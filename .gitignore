@@ -2,8 +2,10 @@
 *.launch
 *.orig
 *.bak
+*.sh
 .vscode/
 **/build/
+**/build*/
 **/GNU ARM v*
 **/.projectlinkstore
 **/.settings
@@ -16,7 +18,7 @@
 **/IAR ARM*
 **/sonar-bw/
 
-##Enable these if you are not tracking Simplicity studio project
+## Enable these if you are not tracking Simplicity studio project
 # **/.cproject
 # **/.project
 # **/.pdm
@@ -30,3 +32,13 @@
 *.xlsx
 *.xls
 *.html
+
+
+
+# code convention tool gitignore
+code-convention-tool/
+**/venv/
+
+# Ignore temporary generated project
+projects/lorawan_examples
+projects/autogen/autogen/.slc_state/.crc_config.crc
