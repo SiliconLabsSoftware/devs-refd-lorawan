@@ -1,0 +1,41 @@
+id: lbm_class_c
+label: LoRa Basic Modem Class C Support
+package: lorawan_extension
+description: >
+  LoRaWAN Class C implementation for LoRa Basic Modem. Provides continuous receive
+  capability with minimal receive windows, enabling always-on downlink reception
+  except during transmission periods.
+category: Third Party|LoRaWAN|LBM Features
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_class_c
+
+requires:
+  - name: lbm_lib
+  - name: device
+
+define:
+  - name: ADD_CLASS_C
+    value: "1"
+  - name: LBM_CLASS_C
+    value: "1"
+
+source:
+  # Class C management and core functionality
+  - path: smtc_modem_core/lr1mac/src/lr1mac_class_c/lr1mac_class_c.c
+
+include:
+  - path: smtc_modem_core/lr1mac/src/lr1mac_class_c
+    file_list:
+      - path: lr1mac_class_c.h
+
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_class_c
+
+documentation:
+  docset: lbm
+  document: class_c_guide

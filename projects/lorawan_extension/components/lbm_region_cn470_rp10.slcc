@@ -1,0 +1,37 @@
+id: lbm_region_cn470_rp10
+label: LoRaWAN CN470 RP1.0 Region Support
+package: lorawan_extension
+description: >
+  China 470 MHz frequency band with Regional Parameters v1.0 (CN470 RP1.0).
+  Legacy regional parameter version for Chinese LoRaWAN deployments
+  using the older RP1.0 specification.
+category: Third Party|LoRaWAN|Regions
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_region_cn470_rp10
+
+requires:
+  - name: lbm_regions
+
+define:
+  - name: REGION_CN_470_RP_1_0
+    value: "1"
+
+source:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src/region_cn_470_rp_1_0.c
+
+include:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src
+    file_list:
+      - path: region_cn_470_rp_1_0_defs.h
+      - path: region_cn_470_rp_1_0.h
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_region_cn470_rp10
+
+documentation:
+  docset: lbm
+  document: cn470_rp10_region_guide

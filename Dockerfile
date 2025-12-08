@@ -1,25 +1,16 @@
 ### This is a template Dockerfile for the CI/CD pipeline
 
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
-ENV TZ=Europe/Budapest
 ENV DEBIAN_FRONTEND=noninteractive
-
-ARG ARCH=x86_64
-ENV ARCH=$ARCH
-
-ENV ARCH_SONARQUBE=$ARCH_SONARQUBE
-ENV ARCH_BUILD_WRAPPER=$ARCH_BUILD_WRAPPER
-
 
 # Define the URLs for the tools
 ##### TODO #####
 # Check and update version numbers if necessary
-
-ARG ARM_GCC_URL="https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-${ARCH}-arm-none-eabi.tar.xz"
-ARG SIMPLICITY_COMMANDER_URL="https://www.silabs.com/documents/login/software/SimplicityCommander-Linux.zip"
+ARG ARM_GCC_URL="https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz"
 ARG SONAR_SCANNER_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.1.0.4477-linux-x64.zip"
 ARG SONAR_BUILD_WRAPPER="https://sonarqube.silabs.net/static/cpp/build-wrapper-linux-x86.zip"
+
 
 #add 3rd party repositories
 RUN apt-get update  \
@@ -32,23 +23,35 @@ RUN apt-get update  \
     && add-apt-repository ppa:openjdk-r/ppa
 
 #Install necessary packages
-RUN apt-get install --no-install-recommends -y \
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y --fix-missing \
     build-essential \
-    cmake \
     curl \
+    wget \
     git \
+    python3 \
+    python3-pip \
     libpcre2-dev \
     make \
     ninja-build \
-    openjdk-17-jdk \
     unzip \
-    wget \
-    zip \
+    bzip2 \
+    xz-utils \
+    tar \
+    libncurses5 \
+    libncursesw5 \
+    libtinfo5 \
+    libusb-1.0-0 \
+    libgtk-3-0 \
+    rsync \
     && rm -rf /var/lib/apt/lists/*
 
 # Install latest CMake
 ADD https://apt.kitware.com/kitware-archive.sh /tmp/kitware-archive.sh
 RUN bash /tmp/kitware-archive.sh \
+    && apt-get update \
+    && apt-get install -y cmake \
+    && rm -rf /var/lib/apt/lists/* \
     && rm /tmp/kitware-archive.sh
 
 # Install GNU Arm Embedded Toolchain
@@ -63,13 +66,6 @@ RUN tar -xf arm-gnu-toolchain.tar.xz \
     && TOOLCHAIN_FOLDER=$(find . -maxdepth 1 -type d -name 'arm-gnu-toolchain-*' | head -n 1) \
     && mv "$TOOLCHAIN_FOLDER" /opt/gcc-arm-none-eabi \
     && rm arm-gnu-toolchain.tar.xz -rf
-
-# Install Simplicity Commander
-ADD "$SIMPLICITY_COMMANDER_URL" SimplicityCommander-Linux.zip
-RUN unzip SimplicityCommander-Linux.zip \
-    && tar -xf SimplicityCommander-Linux/Commander-cli_linux_${ARCH}_*.tar.bz \
-    && mv commander-cli /opt/commander-cli \
-    && rm -rf SimplicityCommander-Linux.zip SimplicityCommander-Linux
 
 # Download and install SonarQube scanner
 #REGEX: $(find /opt -maxdepth 1 -type d -name 'sonar-scanner-*' | head -n 1)
@@ -90,10 +86,7 @@ RUN unzip /tmp/build-wrapper-linux-x86.zip -d /opt \
     && ln -s /opt/build-wrapper-linux-x86/build-wrapper-linux-x86 /usr/local/bin/build-wrapper \
     && rm /tmp/build-wrapper-linux-x86.zip
 
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-ENV POST_BUILD_EXE="/opt/commander-cli/commander-cli"
 ENV ARM_GCC_DIR="/opt/gcc-arm-none-eabi"
-ENV PATH="${PATH}:${JAVA_HOME}/bin"
 ENV PATH="${PATH}:/opt/gcc-arm-none-eabi/bin"
 ENV PATH="${PATH}:/usr/local/bin"
 ENV PATH="${PATH}:/opt/build-wrapper-linux-x86/"

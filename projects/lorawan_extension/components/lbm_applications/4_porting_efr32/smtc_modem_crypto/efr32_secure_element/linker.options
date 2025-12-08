@@ -1,0 +1,16 @@
+-Xlinker --wrap=smtc_secure_element_init
+-Xlinker --wrap=smtc_secure_element_set_key
+-Xlinker --wrap=smtc_secure_element_compute_aes_cmac
+-Xlinker --wrap=smtc_secure_element_verify_aes_cmac
+-Xlinker --wrap=smtc_secure_element_aes_encrypt
+-Xlinker --wrap=smtc_secure_element_derive_and_store_key
+-Xlinker --wrap=smtc_secure_element_derive_relay_session_keys
+-Xlinker --wrap=smtc_secure_element_process_join_accept
+-Xlinker --wrap=smtc_secure_element_set_deveui
+-Xlinker --wrap=smtc_secure_element_get_deveui
+-Xlinker --wrap=smtc_secure_element_set_joineui
+-Xlinker --wrap=smtc_secure_element_get_joineui
+-Xlinker --wrap=smtc_secure_element_set_pin
+-Xlinker --wrap=smtc_secure_element_get_pin
+-Xlinker --wrap=smtc_secure_element_store_context
+-Xlinker --wrap=smtc_secure_element_restore_context

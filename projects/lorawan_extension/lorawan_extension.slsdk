@@ -1,0 +1,10 @@
+# Properties file for Simplicity Studio metadata.
+id=com.example.sdk.lorawan_extension
+label=LoraWAN Extension
+description=LoraWAN extension for Series 2 devices.
+version=1.0.0
+dependantSdkVersion=2025.6.0
+prop.subLabel=LoraWAN_Extension\\ 1.0.0
+
+# General properties are prepended with "prop."
+prop.file.templatesFile=lorawan_extension_templates.xml

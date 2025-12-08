@@ -1,0 +1,29 @@
+id: lbm_regions
+label: LoRaWAN Regional Parameters
+package: lorawan_extension
+description: >
+  LoRaWAN regional parameter support for LoRa Basic Modem. Provides frequency
+  plans and regulatory compliance for different geographical regions worldwide.
+  Supports both RP2-1.0.1 and RP2-1.0.3 regional parameter versions.
+category: Third Party|LoRaWAN|Regional Parameters
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_regions
+
+requires:
+  - name: lbm_lib
+
+define:
+  - name: RP2_103
+    value: "1"
+    unless: [lbm_rp2_101]
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_regions
+
+documentation:
+  docset: lbm
+  document: regions_guide

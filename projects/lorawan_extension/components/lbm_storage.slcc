@@ -1,0 +1,22 @@
+id: lbm_store_and_forward
+label: LoRa Basic Modem Store and Forward
+package: lbm
+description: Store and forward functionality
+category: Third Party|LoRaWAN|LBM Features
+quality: experimental
+
+root_path: "components/SWL2001/lbm_lib"
+
+requires:
+  - name: lbm_lib
+
+define:
+  - name: ADD_SMTC_STORE_AND_FORWARD
+
+source:
+  - path: smtc_modem_core/modem_utilities/circularfs.c
+  - path: smtc_modem_core/modem_services/store_and_forward/store_and_forward_flash.c
+
+include:
+  - path: smtc_modem_core/modem_services
+  - path: smtc_modem_core/modem_services/store_and_forward

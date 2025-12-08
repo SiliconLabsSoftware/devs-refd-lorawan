@@ -1,0 +1,59 @@
+project_name: main_porting_tests
+package: platform
+quality: experimental
+label: LoraWAN Main Porting Tests
+description: "This project contains main porting tests for the LoraWAN extension."
+category: Example|LoraWAN
+
+sdk_extension:
+- {id: lorawan_extension, version: 1.0.0}
+
+source:
+  - path: main.c
+  - path: app.h
+  - path: main_porting_tests.c
+  - path: main_porting_tests.h
+
+component:
+  - {from: lorawan_extension, id: lbm_board_config}
+  - {from: lorawan_extension, id: lbm_hal}
+  - {from: lorawan_extension, id: lbm_lib}
+  - {from: lorawan_extension, id: lbm_radio_hal}
+  - {from: lorawan_extension, id: lbm_region_eu868}
+  - {from: lorawan_extension, id: lbm_sx1262}
+  - {id: app_log}
+  - {id: clock_manager}
+  - {id: device_init}
+  - {id: iostream_recommended_stream}
+  - {id: iostream_retarget_stdio}
+  - {id: iostream_stdlib_config}
+  - {id: power_manager}
+  - instance: [led0, led1]
+    id: simple_led
+  - {id: sl_main}
+  - {id: sl_custom_main}
+  - {id: sleeptimer}
+  - {id: freertos}
+  - {id: emlib_rmu}
+requires:
+  - name: iostream_retarget_stdio
+
+define:
+  - name: DEBUG_EFM
+readme:
+  - path: readme_main_porting_tests.md
+ui_hints:
+  highlight: readme_main_porting_tests.md
+
+configuration:
+  - name: SL_BOARD_ENABLE_VCOM
+    value: "1"
+  - name: SL_IOSTREAM_EUSART_VCOM_RESTRICT_ENERGY_MODE_TO_ALLOW_RECEPTION
+    value: "0"
+  - name: SL_SLEEPTIMER_PERIPHERAL
+    value: "SL_SLEEPTIMER_PERIPHERAL_BURTC"
+  - name: SL_POWER_MANAGER_DEBUG
+    value: "1"
+  - name: SL_CLOCK_MANAGER_WDOG0CLK_SOURCE
+    value: "CMU_WDOG0CLKCTRL_CLKSEL_ULFRCO"
+    

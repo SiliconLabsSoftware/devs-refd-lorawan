@@ -1,0 +1,16 @@
+id: lbm_board_config
+label: LoRa Basic Modem Board Configuration
+package: lorawan_extension
+description: >
+  This component implements LoRa Basic Modem Hardware Abstraction Layer for Series 2 devices with Semtech transceiver.
+  It provides board-specific configuration options for the LoRa Basic Modem.
+category: LBM HAL
+quality: experimental
+ui_hints:
+  visibility: never
+provides:
+  - name: lbm_board_config
+
+requires:
+  - name: lbm_brd4400c_config
+    condition: [brd4400c]

@@ -1,0 +1,37 @@
+id: lbm_region_ru864
+label: LoRaWAN RU864 Region Support
+package: lorawan_extension
+description: >
+  Russia 864 MHz frequency band support (RU864).
+  Provides frequency plan and regulatory compliance
+  for Russian LoRaWAN deployments.
+category: Third Party|LoRaWAN|Regions
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_region_ru864
+
+requires:
+  - name: lbm_regions
+
+define:
+  - name: REGION_RU_864
+    value: "1"
+
+source:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src/region_ru_864.c
+
+include:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src
+    file_list:
+      - path: region_ru_864_defs.h
+      - path: region_ru_864.h
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_region_ru864
+
+documentation:
+  docset: lbm
+  document: ru864_region_guide

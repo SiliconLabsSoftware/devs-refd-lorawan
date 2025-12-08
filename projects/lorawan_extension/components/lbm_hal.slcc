@@ -1,0 +1,57 @@
+id: lbm_hal
+label: LoRa Basic Modem Hardware Abstraction Layer (HAL)
+package: lorawan_extension
+description: >
+  This component implements LoRa Basic Modem Hardware Abstraction Layer for Series 2 devices with Semtech transceiver.
+  It includes hardware abstraction layer (HAL) functions and configuration settings
+  necessary for LoRaWAN communication.
+category: Components
+quality: experimental
+root_path: "components/lbm_applications/4_porting_efr32"
+
+source:
+  - path: smtc_hal_efr32/smtc_hal_gpio.c
+  - path: smtc_hal_efr32/smtc_hal_lp_timer.c
+  - path: smtc_hal_efr32/smtc_hal_rtc.c
+  - path: smtc_hal_efr32/smtc_hal_watchdog.c
+  - path: smtc_hal_efr32/smtc_hal_spi.c
+  - path: smtc_hal_efr32/smtc_hal_rng.c
+  - path: smtc_hal_efr32/smtc_hal_iadc.c
+  - path: smtc_hal_efr32/smtc_hal_crashlog.c
+  - path: smtc_hal_efr32/smtc_hal_context.c
+  - path: smtc_hal_efr32/smtc_hal_flash.c
+  - path: smtc_hal_efr32/smtc_hal_trace.c
+  - path: smtc_hal_efr32/smtc_hal_bootloader.c
+    condition:
+      - lbm_fuota
+  - path: smtc_hal_efr32/smtc_hal_mcu.c
+  - path: smtc_modem_hal/smtc_modem_hal.c
+include:
+  - path: ./smtc_hal_efr32
+    file_list:
+      - path: smtc_hal_lp_timer.h
+      - path: smtc_hal_rtc.h
+      - path: smtc_hal_watchdog.h
+      - path: smtc_hal_gpio.h
+      - path: smtc_hal_rng.h
+      - path: smtc_hal_iadc.h
+      - path: smtc_hal_crashlog.h
+      - path: smtc_hal_context.h
+      - path: smtc_hal_flash.h
+      - path: smtc_hal_trace.h
+      - path: smtc_hal_dbg_trace.h
+      - path: smtc_hal_spi.h
+      - path: smtc_hal_bootloader.h
+        condition:
+          - lbm_fuota
+      - path: smtc_hal_mcu.h
+provides:
+  - name: lbm_hal
+
+requires:
+  - name: hal_wdog
+  - name: hal_letimer
+  - name: sl_main
+  - name: nvm3_lib
+  - name: psa_crypto
+  - name: emlib_iadc

@@ -1,0 +1,37 @@
+id: lbm_region_kr920
+label: LoRaWAN KR920 Region Support
+package: lorawan_extension
+description: >
+  Korea 920 MHz frequency band support (KR920).
+  Provides frequency plan and regulatory compliance
+  for Korean LoRaWAN deployments.
+category: Third Party|LoRaWAN|Regions
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_region_kr920
+
+requires:
+  - name: lbm_regions
+
+define:
+  - name: REGION_KR_920
+    value: "1"
+
+source:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src/region_kr_920.c
+
+include:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src
+    file_list:
+      - path: region_kr_920_defs.h
+      - path: region_kr_920.h
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_region_kr920
+
+documentation:
+  docset: lbm
+  document: kr920_region_guide

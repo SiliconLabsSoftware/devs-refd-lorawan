@@ -1,0 +1,23 @@
+id: lbm_sx1268
+label: LoRa Basic Modem SX1268 Variant
+package: lorawan_extension
+description: >
+  SX1268 specific configuration for LoRa Basic Modem.
+  China frequency variant of the SX126x family.
+category: Third Party|LoRaWAN|LBM Radio Drivers
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_sx1268
+
+requires:
+  - name: lbm_sx126x
+
+define:
+  - name: SX1268
+    value: "1"
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_sx1268

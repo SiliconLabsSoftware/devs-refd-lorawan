@@ -1,0 +1,23 @@
+id: lbm_csma
+label: LoRa Basic Modem CSMA Support
+package: lorawan_extension
+description: >
+  Carrier Sense Multiple Access (CSMA) support for LoRa Basic Modem.
+  Enables listen-before-talk functionality for regulatory compliance.
+category: Third Party|LoRaWAN|LBM Features
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_csma
+
+requires:
+  - name: lbm_sx126x
+
+define:
+  - name: ADD_CSMA
+    value: "1"
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_csma

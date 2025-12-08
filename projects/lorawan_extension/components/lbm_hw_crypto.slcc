@@ -1,0 +1,24 @@
+id: lbm_hw_crypto
+label: LoRa Basic Modem Hardware Crypto
+package: lorawan_extension
+description: >
+  LoRa Basic Modem Implement hardware crypto for Series 2 devices with Secure Element.
+category: LBM HAL
+quality: experimental
+root_path: "components/lbm_applications/4_porting_efr32/smtc_modem_crypto/efr32_secure_element"
+
+source:
+  - path: smtc_secure_element_efr32.c
+
+provides:
+  - name: lbm_hw_crypto
+
+other_file:
+  - path: linker.options
+    project:
+      transfer_ownership: true
+      directory: linker_options
+toolchain_settings:
+  - option: linker_option
+    value: "@$project/linker_options/linker.options"
+    condition: [toolchain_gcc]
