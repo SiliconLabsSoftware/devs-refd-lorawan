@@ -1,94 +1,67 @@
-### This is a template Dockerfile for the CI/CD pipeline
-
-FROM ubuntu:22.04
+# Pinned base image by digest for Ubuntu 22.04 (retrieved from Docker Hub)
+FROM ubuntu@sha256:1c4cc37c10c4678fd5369d172a4e079af8a28a6e6f724647ccaa311b4801c3c9
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Define the URLs for the tools
-##### TODO #####
-# Check and update version numbers if necessary
-ARG ARM_GCC_URL="https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz"
-ARG SONAR_SCANNER_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.1.0.4477-linux-x64.zip"
-ARG SONAR_BUILD_WRAPPER="https://sonarqube.silabs.net/static/cpp/build-wrapper-linux-x86.zip"
-
-
-#add 3rd party repositories
-RUN apt-get update  \
-    && apt-get install --no-install-recommends -y \
-    apt-utils \
-    gpg \
-    gpg-agent \
-    ca-certificates \
-    software-properties-common \
+# ---- Pin package versions ----
+# Add 3rd party repositories
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    apt-utils=2.4.14 \
+    gpg=2.2.27-3ubuntu2.4 \
+    gpg-agent=2.2.27-3ubuntu2.4 \
+    ca-certificates=20240203~22.04.1 \
+    software-properties-common=0.99.22.9 \
     && add-apt-repository ppa:openjdk-r/ppa
 
-#Install necessary packages
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y --fix-missing \
-    build-essential \
-    curl \
-    wget \
-    git \
-    python3 \
-    python3-pip \
-    libpcre2-dev \
-    make \
-    ninja-build \
-    unzip \
-    bzip2 \
-    xz-utils \
-    tar \
-    libncurses5 \
-    libncursesw5 \
-    libtinfo5 \
-    libusb-1.0-0 \
-    libgtk-3-0 \
-    rsync \
+# Install necessary packages
+RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
+    build-essential=12.9ubuntu3 \
+    curl=7.81.0-1ubuntu1.21 \
+    wget=1.21.2-2ubuntu1.1 \
+    git=1:2.34.1-1ubuntu1.15 \
+    python3=3.10.6-1~22.04.1 \
+    python3-pip=22.0.2+dfsg-1ubuntu0.7 \
+    libpcre2-dev=10.39-3ubuntu0.1 \
+    make=4.3-4.1build1 \
+    ninja-build=1.10.1-1 \
+    unzip=6.0-26ubuntu3.2 \
+    bzip2=1.0.8-5build1 \
+    xz-utils=5.2.5-2ubuntu1 \
+    tar=1.34+dfsg-1ubuntu0.1.22.04.2 \
+    libncurses5=6.3-2ubuntu0.1 \
+    libncursesw5=6.3-2ubuntu0.1 \
+    libtinfo5=6.3-2ubuntu0.1 \
+    libusb-1.0-0=2:1.0.25-1ubuntu2 \
+    libgtk-3-0=3.24.33-1ubuntu2.2 \
+    rsync=3.2.7-0ubuntu0.22.04.4 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install latest CMake
-ADD https://apt.kitware.com/kitware-archive.sh /tmp/kitware-archive.sh
-RUN bash /tmp/kitware-archive.sh \
+# Install latest CMake from Kitware APT repository, verify via SHA256
+ARG KITWARE_URL="https://apt.kitware.com/kitware-archive.sh"
+ARG KITWARE_SHA256="4c16054d0a4808c9871e347dd1b10c1e4bbd3880b31235c06d6be91f86f4bf8f"
+RUN curl -fsSL -o /tmp/kitware-archive.sh $KITWARE_URL \
+    && echo "$KITWARE_SHA256  /tmp/kitware-archive.sh" | sha256sum -c - \
+    && bash /tmp/kitware-archive.sh \
     && apt-get update \
     && apt-get install -y cmake \
     && rm -rf /var/lib/apt/lists/* \
     && rm /tmp/kitware-archive.sh
 
-# Install GNU Arm Embedded Toolchain
-# REGEXP: $(find . -maxdepth 1 -type d -name 'arm-gnu-toolchain-*' | head -n 1)
-# This will find the first folder in the current directory that starts with 'arm-gnu-toolchain-'
-# This is necessary because the downloaded archive contains a folder with a version number in the name
-# and we don't know what that version number is.
+# Download & install GNU Arm Embedded Toolchain, verify via SHA256
+ARG ARM_GCC_URL="https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz"
+ARG ARM_GCC_SHA256="84be93d0f9e96a15addd490b6e237f588c641c8afdf90e7610a628007fc96867"
 WORKDIR /tmp
-ADD "$ARM_GCC_URL" arm-gnu-toolchain.tar.xz
-
-RUN tar -xf arm-gnu-toolchain.tar.xz \
+RUN curl -fsSL -o arm-gnu-toolchain.tar.xz $ARM_GCC_URL \
+    && echo "sha256sum arm-gnu-toolchain.tar.xz" \
+    && echo "$ARM_GCC_SHA256  arm-gnu-toolchain.tar.xz" | sha256sum -c - \
+    && tar -xf arm-gnu-toolchain.tar.xz \
     && TOOLCHAIN_FOLDER=$(find . -maxdepth 1 -type d -name 'arm-gnu-toolchain-*' | head -n 1) \
     && mv "$TOOLCHAIN_FOLDER" /opt/gcc-arm-none-eabi \
     && rm arm-gnu-toolchain.tar.xz -rf
 
-# Download and install SonarQube scanner
-#REGEX: $(find /opt -maxdepth 1 -type d -name 'sonar-scanner-*' | head -n 1)
-#This will find the first folder in /opt that starts with 'sonar-scanner-'
-#This is necessary because the downloaded archive contains a folder with a version number in the name
-#and we don't know what that version number is.
-
-ADD  "$SONAR_SCANNER_URL" /tmp/sonar-scanner-cli.zip
-
-RUN unzip /tmp/sonar-scanner-cli.zip -d /opt \
-    && SCANNER_FOLDER=$(find /opt -maxdepth 1 -type d -name 'sonar-scanner-*' | head -n 1) \
-    && ln -s ${SCANNER_FOLDER}/bin/sonar-scanner /usr/local/bin/sonar-scanner \
-    && rm /tmp/sonar-scanner-cli.zip
-
-# Download and install build-wrapper
-ADD "$SONAR_BUILD_WRAPPER" /tmp/build-wrapper-linux-x86.zip
-RUN unzip /tmp/build-wrapper-linux-x86.zip -d /opt \
-    && ln -s /opt/build-wrapper-linux-x86/build-wrapper-linux-x86 /usr/local/bin/build-wrapper \
-    && rm /tmp/build-wrapper-linux-x86.zip
-
+# ---- Environment ----
 ENV ARM_GCC_DIR="/opt/gcc-arm-none-eabi"
 ENV PATH="${PATH}:/opt/gcc-arm-none-eabi/bin"
 ENV PATH="${PATH}:/usr/local/bin"
-ENV PATH="${PATH}:/opt/build-wrapper-linux-x86/"
 
 WORKDIR /home
