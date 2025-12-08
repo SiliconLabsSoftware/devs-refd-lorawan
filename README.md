@@ -1,8 +1,5 @@
 # LoRaWAN PoC for Series 2 devices
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Platform](https://img.shields.io/badge/platform-EFR32-green.svg)
-
 The project is a Proof of Concept (PoC) focusing on the stack porting and enable using some sample applications for evaluation. The purpose of this project is to port the LoRa Basic Modem to the Silicon Labs EFR32FG28 microcontroller platform using the Semtech SX1262/LLCC68 radio transceivers. This will enable low-power, long-range wireless communication for embedded applications.
 
 ## Features
