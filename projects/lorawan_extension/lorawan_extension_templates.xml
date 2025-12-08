@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='ASCII'?>
+<model:MDescriptors xmlns:model="http://www.silabs.com/ss/Studio.ecore">
+
+  <descriptors name="main_porting_tests" label="LoraWAN Main Porting Tests" description="This project contains main porting tests for the Series 2 devices with LoraWAN extension.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="projectFilePaths" value="components/lbm_applications/4_porting_efr32/main_examples/main_porting_tests.slcp"/>
+    <properties key="readmeFiles" value="components/lbm_applications/4_porting_efr32/main_examples/readme_main_porting_tests.md"/>
+    <properties key="boardCompatibility" value=".*"/>
+    <properties key="partCompatibility" value=".*"/>
+    <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|LoraWAN extension"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+
+  <descriptors name="main_lctt_certif" label="LoraWAN Main LCTT Certification" description="This project contains main LCTT certification tests for the Series 2 devices with LoraWAN extension.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="projectFilePaths" value="components/lbm_applications/4_porting_efr32/main_examples/main_lctt_certif.slcp"/>
+    <properties key="readmeFiles" value="components/lbm_applications/4_porting_efr32/main_examples/readme_main_lctt_certif.md"/>
+    <properties key="boardCompatibility" value=".*"/>
+    <properties key="partCompatibility" value=".*"/>
+    <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|LoraWAN extension"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+
+  <descriptors name="main_periodical_uplink" label="LoraWAN Main Periodical Uplink" description="This project contains main periodical uplink tests for the Series 2 devices with LoraWAN extension.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="projectFilePaths" value="components/lbm_applications/4_porting_efr32/main_examples/main_periodical_uplink.slcp"/>
+    <properties key="readmeFiles" value="components/lbm_applications/4_porting_efr32/main_examples/readme_main_periodical_uplink.md"/>
+    <properties key="boardCompatibility" value=".*"/>
+    <properties key="partCompatibility" value=".*"/>
+    <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|LoraWAN extension"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+
+  <descriptors name="main_ping_pong" label="LoraWAN Main Ping Pong Tests" description="This project contains main ping pong tests for the Series 2 devices with LoraWAN extension.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="projectFilePaths" value="components/lbm_applications/4_porting_efr32/main_examples/main_ping_pong.slcp"/>
+    <properties key="readmeFiles" value="components/lbm_applications/4_porting_efr32/main_examples/readme_main_ping_pong.md"/>
+    <properties key="boardCompatibility" value=".*"/>
+    <properties key="partCompatibility" value=".*"/>
+    <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|LoraWAN extension"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+
+  <descriptors name="lbm_hal_utest" label="LoraWan HAL Unit Tests" description="This project contains HAL unit tests for the Series 2 devices with LoraWAN extension.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="projectFilePaths" value="test/lbm_hal_utest.slcp"/>
+    <properties key="readmeFiles" value="test/README.md"/>
+    <properties key="boardCompatibility" value=".*"/>
+    <properties key="partCompatibility" value=".*"/>
+    <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|LoraWAN extension"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+
+  <descriptors name="lbm_radio_hal_unit_tests" label="LoraWan Radio HAL Unit Tests" description="This project contains Radio HAL unit tests for the Series 2 devices with LoraWAN extension.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="projectFilePaths" value="test/test_lbm_radio_hal/lbm_radio_hal_unit_tests.slcp"/>
+    <properties key="readmeFiles" value="test/test_lbm_radio_hal/README.md"/>
+    <properties key="boardCompatibility" value=".*"/>
+    <properties key="partCompatibility" value=".*"/>
+    <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|LoraWAN extension"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+
+  <descriptors name="lbm_modem_crypto_unit_tests" label="LoraWan Modem Crypto Unit Test" description="This project contains Modem Crypto unit tests for the Series 2 devices with LoraWAN extension.">
+    <properties key="namespace" value="template.uc"/>
+    <properties key="keywords" value="universal\ configurator"/>
+    <properties key="projectFilePaths" value="test/test_smtc_modem_crypto/smtc_modem_crypto.slcp"/>
+    <properties key="readmeFiles" value="test/test_smtc_modem_crypto/README.md"/>
+    <properties key="boardCompatibility" value=".*"/>
+    <properties key="partCompatibility" value=".*"/>
+    <properties key="ideCompatibility" value="iar-embedded-workbench makefile-ide simplicity-ide visual-studio-code"/>
+    <properties key="toolchainCompatibility" value="gcc iar segger"/>
+    <properties key="category" value="Example|LoraWAN extension"/>
+    <properties key="quality" value="EXPERIMENTAL"/>
+    <properties key="stockConfigCompatibility" value="com.silabs.ss.framework.project.toolchain.core.default"/>
+    <properties key="filters" value="Device\ Type|SoC MCU|32-bit\ MCU Project\ Difficulty|Beginner"/>
+  </descriptors>
+</model:MDescriptors>

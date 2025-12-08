@@ -1,0 +1,52 @@
+project_name: modem_crypto_unit_test
+package: platform
+quality: production
+label: Modem crypto unit test
+description: "This project contains unit test for Modem crypto."
+category: Example|LoraWAN
+sdk: 
+  id: simplicity_sdk
+  version: 2025.6.0
+sdk_extension:
+- {id: lorawan_extension, version: 1.0.0}
+
+source:
+- {path: app.c}
+- {path: app.h}
+- {path: smtc_crypto_test_runner.c}
+- {path: smtc_crypto_test_runner.h}
+- {path: test_smtc_modem_crypto.c}
+- {path: test_smtc_modem_crypto.h}
+
+component:
+- {from: lorawan_extension, id: lbm_lib}
+- {from: lorawan_extension, id: lbm_region_eu868}
+- {from: lorawan_extension, id: lbm_sx1262}
+- {from: lorawan_extension, id: lbm_radio_hal}
+- {from: lorawan_extension, id: lbm_hal}
+- {id: app_log}
+- {id: clock_manager}
+- {id: device_init}
+- {id: iostream_recommended_stream}
+- {id: iostream_retarget_stdio}
+- {id: iostream_stdlib_config}
+- {id: power_manager}
+- instance: [led0, led1]
+  id: simple_led
+- {id: sl_main}
+- {id: sleeptimer}
+- {id: test_framework_unity}
+
+requires:
+  - name: iostream_retarget_stdio
+define:
+  - name: DEBUG_EFM
+readme:
+  - path: README.md
+ui_hints:
+  highlight:
+  - {path: README.md, focus: true}
+
+configuration:
+  - name: SL_BOARD_ENABLE_VCOM
+    value: "1"

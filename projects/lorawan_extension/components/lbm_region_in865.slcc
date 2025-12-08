@@ -1,0 +1,37 @@
+id: lbm_region_in865
+label: LoRaWAN IN865 Region Support
+package: lorawan_extension
+description: >
+  India 865 MHz frequency band support (IN865).
+  Provides frequency plan and regulatory compliance
+  for Indian LoRaWAN deployments.
+category: Third Party|LoRaWAN|Regions
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_region_in865
+
+requires:
+  - name: lbm_regions
+
+define:
+  - name: REGION_IN_865
+    value: "1"
+
+source:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src/region_in_865.c
+
+include:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src
+    file_list:
+      - path: region_in_865_defs.h
+      - path: region_in_865.h
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_region_in865
+
+documentation:
+  docset: lbm
+  document: in865_region_guide

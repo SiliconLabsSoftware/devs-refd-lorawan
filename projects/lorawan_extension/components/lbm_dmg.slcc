@@ -1,0 +1,21 @@
+id: lbm_device_management
+label: LoRa Basic Modem Device Management
+package: lbm
+description: Cloud device management package support
+category: Third Party|LoRaWAN|LBM Features
+quality: experimental
+
+root_path: "components/SWL2001/lbm_lib"
+
+requires:
+  - name: lbm_lib
+
+define:
+  - name: ADD_SMTC_CLOUD_DEVICE_MANAGEMENT
+
+source:
+  - path: smtc_modem_core/modem_services/cloud_dm_package/cloud_dm_package.c
+
+include:
+  - path: smtc_modem_core/modem_services
+  - path: smtc_modem_core/modem_services/cloud_dm_package

@@ -1,0 +1,164 @@
+id: lbm_lib
+label: LoRa Basic Modem library
+package: lorawan_extension
+description: >
+  Semtech LoRaWAN Basic Modem (LBM) library providing LoRaWAN stack implementation
+  with support for various features including FUOTA, device management, streaming,
+  and store-and-forward functionality.
+category: Third Party|LoRaWAN
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_lib
+
+requires:
+  - name: device
+
+source:
+  # Core modem sources
+  - path: smtc_modem_core/lorawan_api/lorawan_api.c
+  - path: smtc_modem_core/smtc_modem.c
+  - path: smtc_modem_core/smtc_modem_test.c
+  - path: smtc_modem_core/modem_utilities/modem_event_utilities.c
+  - path: smtc_modem_core/modem_utilities/fifo_ctrl.c
+  - path: smtc_modem_core/modem_utilities/modem_core.c
+  - path: smtc_modem_core/modem_supervisor/modem_supervisor_light.c
+  - path: smtc_modem_core/modem_supervisor/modem_tx_protocol_manager.c
+  - path: smtc_modem_core/lorawan_packages/lorawan_certification/lorawan_certification.c
+  - path: smtc_modem_core/lorawan_manager/lorawan_join_management.c
+  - path: smtc_modem_core/lorawan_manager/lorawan_send_management.c
+  - path: smtc_modem_core/lorawan_manager/lorawan_cid_request_management.c
+  - path: smtc_modem_core/lorawan_manager/lorawan_dwn_ack_management.c
+
+  # LR1MAC sources
+  - path: smtc_modem_core/lr1mac/src/lr1_stack_mac_layer.c
+  - path: smtc_modem_core/lr1mac/src/lr1mac_core.c
+  - path: smtc_modem_core/lr1mac/src/lr1mac_utilities.c
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src/smtc_real.c
+  - path: smtc_modem_core/lr1mac/src/services/smtc_duty_cycle.c
+  - path: smtc_modem_core/lr1mac/src/services/smtc_lbt.c
+
+  # Crypto sources
+  - path: smtc_modem_core/smtc_modem_crypto/smtc_modem_crypto.c
+
+  # Radio planner sources
+  - path: smtc_modem_core/radio_planner/src/radio_planner.c
+
+include:
+  - path: .
+    file_list:
+      - path: lora_basics_modem_version.h
+  - path: smtc_modem_api
+    file_list:
+      - path: smtc_modem_utilities.h
+      - path: smtc_modem_relay_api.h
+      - path: smtc_modem_test_api.h
+      - path: smtc_modem_geolocation_api.h
+      - path: smtc_modem_api.h
+  - path: smtc_modem_core
+    file_list:
+      - path: smtc_modem_test.h
+  - path: smtc_modem_core/logging
+    file_list:
+      - path: smtc_modem_hal_dbg_trace.h
+  - path: smtc_modem_core/modem_supervisor
+    file_list:
+      - path: modem_tx_protocol_manager.h
+      - path: modem_supervisor_light.h
+  - path: smtc_modem_core/modem_utilities
+    file_list:
+      - path: modem_event_utilities.h
+      - path: modem_services_config.h
+      - path: modem_core.h
+      - path: fifo_ctrl.h
+      - path: circularfs.h
+  - path: smtc_modem_core/lorawan_packages
+  - path: smtc_modem_core/lorawan_packages/lorawan_certification
+    file_list:
+      - path: lorawan_certification.h
+  - path: smtc_modem_core/lorawan_manager
+    file_list:
+      - path: lorawan_send_management.h
+      - path: lorawan_management_defs.h
+      - path: lorawan_join_management.h
+      - path: lorawan_dwn_ack_management.h
+      - path: lorawan_class_b_management.h
+      - path: lorawan_cid_request_management.h
+  - path: smtc_modem_core/lorawan_api
+    file_list:
+      - path: lorawan_api.h
+  - path: smtc_modem_core/smtc_ral/src
+    file_list:
+      - path: ral_drv.h
+      - path: ral_defs.h
+      - path: ral.h
+      - path: lr_fhss_v1_base_types.h
+  - path: smtc_modem_core/smtc_ralf/src
+    file_list:
+      - path: ralf_defs.h
+      - path: ralf_drv.h
+      - path: ralf.h
+  - path: smtc_modem_core/lr1mac
+    file_list:
+      - path: lr1mac_config.h
+  - path: smtc_modem_core/lr1mac/src
+    file_list:
+      - path: lr1mac_utilities.h
+      - path: lr1mac_defs.h
+      - path: lr1mac_core.h
+      - path: lr1_stack_mac_layer.h
+  - path: smtc_modem_core/lr1mac/src/services
+    file_list:
+      - path: smtc_lbt.h
+      - path: smtc_duty_cycle.h
+      - path: smtc_lora_cad_bt.h
+  - path: smtc_modem_core/radio_planner/src
+    file_list:
+      - path: radio_planner_types.h
+      - path: radio_planner_stats.h
+      - path: radio_planner_hook_id_defs.h
+      - path: radio_planner.h
+  - path: smtc_modem_core/smtc_modem_crypto
+    file_list:
+      - path: smtc_modem_crypto.h
+  - path: smtc_modem_core/smtc_modem_crypto/smtc_secure_element
+    file_list:
+      - path: smtc_secure_element.h
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src
+    file_list:
+      - path: smtc_real_defs_str.h
+      - path: smtc_real_defs.h
+      - path: smtc_real.h
+  - path: smtc_modem_hal
+    file_list:
+      - path: smtc_modem_hal.h
+
+define:
+  - name: NUMBER_OF_STACKS
+    value: "1"
+
+
+
+# Todo: check if the following is needed
+# toolchain_settings:
+#   - option: gcc_compiler_option
+#     value: -std=c17
+#   - option: gcc_compiler_option
+#     value: -ffunction-sections
+#   - option: gcc_compiler_option
+#     value: -fdata-sections
+#   - option: gcc_compiler_option
+#     value: -fstack-usage
+#   - option: gcc_compiler_option
+#     value: -fno-unroll-loops
+#   - option: gcc_compiler_option
+#     value: -ffast-math
+#   - option: gcc_compiler_option
+#     value: -ftree-vectorize
+#   - option: gcc_compiler_option
+#     value: -falign-functions=4
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_lib

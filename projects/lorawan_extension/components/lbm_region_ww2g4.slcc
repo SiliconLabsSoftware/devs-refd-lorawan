@@ -1,0 +1,39 @@
+id: lbm_region_ww2g4
+label: LoRaWAN WW2G4 Region Support
+package: lorawan_extension
+description: >
+  Worldwide 2.4 GHz frequency band support (WW2G4) for SX128x and LR11xx radios.
+  Provides global 2.4 GHz ISM band operation with single datarate configuration.
+  Compatible with SX128x, LR1120, and LR1121 radio transceivers.
+category: Third Party|LoRaWAN|Regions
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_region_ww2g4
+
+requires:
+  - name: lbm_regions
+
+define:
+  - name: REGION_WW2G4
+    value: "1"
+  - name: WW2G4_SINGLE_DATARATE
+    value: "1"
+
+source:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src/region_ww2g4.c
+
+include:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src
+    file_list:
+      - path: region_ww2g4_defs.h
+      - path: region_ww2g4.h
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_region_ww2g4
+
+documentation:
+  docset: lbm
+  document: ww2g4_region_guide

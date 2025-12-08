@@ -1,0 +1,50 @@
+id: lbm_class_b
+label: LoRa Basic Modem Class B Support
+package: lorawan_extension
+description: >
+  LoRaWAN Class B implementation for LoRa Basic Modem. Provides beacon reception,
+  ping slot functionality, and downlink scheduling for Class B devices.
+  Requires time synchronization and ping slot configuration.
+category: Third Party|LoRaWAN|LBM Features
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_class_b
+
+requires:
+  - name: lbm_lib
+  - name: device
+
+define:
+  - name: ADD_CLASS_B
+    value: "1"
+  - name: LBM_CLASS_B
+    value: "1"
+
+source:
+  # Class B management and core functionality
+  - path: smtc_modem_core/lorawan_manager/lorawan_class_b_management.c
+  - path: smtc_modem_core/lr1mac/src/lr1mac_class_b/smtc_beacon_sniff.c
+  - path: smtc_modem_core/lr1mac/src/lr1mac_class_b/smtc_ping_slot.c
+  - path: smtc_modem_core/lr1mac/src/services/smtc_multicast/smtc_multicast.c
+include:
+  - path: smtc_modem_core/lorawan_manager
+    file_list:
+      - path: lorawan_class_b_management.h
+  - path: smtc_modem_core/lr1mac/src/lr1mac_class_b
+    file_list:
+      - path: smtc_beacon_sniff.h
+      - path: smtc_ping_slot.h
+  - path: smtc_modem_core/lr1mac/src/services/smtc_multicast
+    file_list:
+      - path: smtc_multicast.h
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_class_b
+
+
+documentation:
+  docset: lbm
+  document: class_b_guide

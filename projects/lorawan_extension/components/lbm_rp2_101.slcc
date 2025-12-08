@@ -1,0 +1,28 @@
+id: lbm_rp2_101
+label: LoRaWAN Regional Parameters v2.1.0.1
+package: lorawan_extension
+description: >
+  LoRaWAN Regional Parameters specification version 2.1.0.1 support.
+  This component enables the older RP2-1.0.1 specification instead of
+  the default RP2-1.0.3 version.
+category: Third Party|LoRaWAN|Regional Parameters
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_rp2_101
+
+requires:
+  - name: lbm_regions
+
+define:
+  - name: RP2_101
+    value: "1"
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_rp2_101
+
+documentation:
+  docset: lbm
+  document: rp2_101_guide

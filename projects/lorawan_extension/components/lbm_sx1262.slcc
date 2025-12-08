@@ -1,0 +1,23 @@
+id: lbm_sx1262
+label: LoRa Basic Modem SX1262 Variant
+package: lorawan_extension
+description: >
+  SX1262 specific configuration for LoRa Basic Modem.
+  Enhanced sensitivity, High power variant of the SX126x family.
+category: Third Party|LoRaWAN|LBM Radio Drivers
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_sx1262
+
+requires:
+  - name: lbm_sx126x
+
+define:
+  - name: SX1262
+    value: "1"
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_sx1262

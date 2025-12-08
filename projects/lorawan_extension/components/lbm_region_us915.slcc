@@ -1,0 +1,37 @@
+id: lbm_region_us915
+label: LoRaWAN US915 Region Support
+package: lorawan_extension
+description: >
+  United States 915 MHz frequency band support (US915).
+  Provides frequency plan and regulatory compliance
+  for US LoRaWAN deployments including FCC regulations.
+category: Third Party|LoRaWAN|Regions
+quality: experimental
+root_path: "components/SWL2001/lbm_lib"
+
+provides:
+  - name: lbm_region_us915
+
+requires:
+  - name: lbm_regions
+
+define:
+  - name: REGION_US_915
+    value: "1"
+
+source:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src/region_us_915.c
+
+include:
+  - path: smtc_modem_core/lr1mac/src/smtc_real/src
+    file_list:
+      - path: region_us_915_defs.h
+      - path: region_us_915.h
+
+template_contribution:
+  - name: component_catalog
+    value: lbm_region_us915
+
+documentation:
+  docset: lbm
+  document: us915_region_guide

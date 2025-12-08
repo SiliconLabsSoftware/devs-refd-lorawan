@@ -1,56 +1,39 @@
-# Developer Services template project
-** TODO ** Put project introduction here. 1-2 sentence about the project.
-## How to use the template
-1. Import the [basic ruleset](https://github.com/SiliconLabsSoftware/devs-template/blob/main/.github/rulesets/Silabs-basic-public-ruleset.json). Follow the official GitHub [guide](https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/managing-rulesets-for-repositories-in-your-organization#importing-a-ruleset).
-2. Update if necessary the [issue_templates](.github/ISSUE_TEMPLATE/) and the [pull request template](./.github/PULL_REQUEST_TEMPLATE.md)
-3. Create your sw projects under [projects/](projects/) folder.
-4. Check [.gitignore](.gitignore) file and modify it if it is necessary
-5. Check the [./Dockerfile](./Dockerfile) and extend it if necessary
-6. Make sure that the whole project can be compiled with a single "make all" command.  
-   also implement "make clean"
-7. Fill out the [CODEOWNERS](./.github/CODEOWNERS) file. Here is the official github [guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
-8. Add github app private key for CLA assistant signature. Contact silicon labs github support person for it.
-9. Check the available [workflows](./.github/workflows) and adjust them according to the repo types (internal or public)
-10. Update this Readme file and remove this list from it.
+# LoRaWAN PoC for Series 2 devices
 
-## Hardware requirements
-** TODO ** List the required hw components.
+The project is a Proof of Concept (PoC) focusing on the stack porting and enable using some sample applications for evaluation. The purpose of this project is to port the LoRa Basic Modem to the Silicon Labs EFR32FG28 microcontroller platform using the Semtech SX1262/LLCC68 radio transceivers. This will enable low-power, long-range wireless communication for embedded applications.
 
-## Hardware Setup
-** TODO ** Create a block diagram about the components.
+## Features
 
-## Build environment setup
-** TODO ** Add steps here how to create a build environment. Remove the not supported platforms.
-### Docker
-Using Docker for the build environment has several advantages:
-- **Consistency**: Ensures the build environment is the same across all development machines.
-- **Isolation**: Keeps the build environment isolated from the host machine, avoiding conflicts.
-- **Portability**: Allows the build environment to be easily shared and reproduced.
-- **Scalability**: Simplifies scaling the build process across multiple machines.
+- LoRaWAN stack implementation for EFR32 Series 2 devices
+- Support for Semtech SX1262/LLCC68 radio transceivers
+- Sample applications for evaluation and testing
+- Integration with Silicon Labs Simplicity Studio 5
 
-To set up the Docker-based build environment, follow these steps:
-1. Install Docker on your machine. Only Linux and MacOS platforms are supported for now.
-2. Clone the repository.
-3. Build the Docker image using the provided [Dockerfile](./Dockerfile).
-4. Run the Docker container with the necessary configurations.
+## Getting Started
 
-### Windows
-** TODO ** With a numbered list define the process how to set up a development environment.
+For detailed setup instructions, hardware requirements, software installation, and usage examples, please refer to the [User Guide](projects/lorawan_extension/docs/RefD_LoRaWAN_User_Guide_v1.0.0.md).
 
-### Linux
-** TODO ** With a numbered list define the process how to set up a development environment.
 
-### MacOS
-** TODO ** With a numbered list define the process how to set up a development environment.
+## Project Structure
 
-## Debug environment
-**TODO**
-Explain how can a developer debug this software project. Pictures are recommended.
+```
+├── projects/lorawan_extension/     # Main LoRaWAN extension
+│   ├── components/                 # Hardware abstraction components
+│   │   ├── lbm_applications/
+│   │   │   └── 4_porting_efr32/
+│   │   │       ├── main_example/  # Example applications
+│   │   │       ├── test/          # Unit tests and test applications
+│   ├── config/                    # Configuration files
+│   ├── docs/                      # Documentation
+│   ├── examples/                  # Example projects
+│   ├── scripts/                   # Build and utility scripts
+│   └── test/                      # Test suites
+├── resources/
+│   └── documents/                 # Additional documentation
+└── README.md                      # This file
+```
 ## Contributing
-Please follow the [CONTRIBUTING](./.github/CONTRIBUTING.md) guideline.
+Please follow the [CONTRIBUTING](./.github/CONTRIBUTING.md) guidelines.
 
 ## License
 See the [LICENSE.md](./LICENSE.md) file for details.
-
-## Secrets
-** TODO** List here the necessary secrets. DO NOT USE PERSONAL ACCESS TOKENS IN PUBLIC REPOSITORIES.
