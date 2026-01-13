@@ -8,7 +8,6 @@ The project is a Proof of Concept (PoC) focusing on the stack porting and enable
 - Support for Semtech SX1262/LLCC68 radio transceivers
 - Sample applications for evaluation and testing
 - Integration with Silicon Labs Simplicity Studio 5
-- Pre-built binaries for quick testing
 
 ## Getting Started
 
@@ -30,9 +29,7 @@ For detailed setup instructions, hardware requirements, software installation, a
 │   ├── scripts/                   # Build and utility scripts
 │   └── test/                      # Test suites
 ├── resources/
-│   ├── binaries/                  # Pre-built firmware binaries
-│   ├── documents/                 # Additional documentation
-│   └── images/                    # Documentation images
+│   └── documents/                 # Additional documentation
 └── README.md                      # This file
 ```
 ## Contributing
