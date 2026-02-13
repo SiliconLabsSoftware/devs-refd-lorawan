@@ -5,10 +5,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # ---- Pin package versions ----
 # Add 3rd party repositories
+# gpg/gpg-agent: not pinned — exact versions removed from Ubuntu repos over time
 RUN apt-get update && apt-get install --no-install-recommends -y \
     apt-utils=2.4.14 \
-    gpg=2.2.27-3ubuntu2.4 \
-    gpg-agent=2.2.27-3ubuntu2.4 \
+    gpg \
+    gpg-agent \
     ca-certificates=20240203~22.04.1 \
     software-properties-common=0.99.22.9 \
     && add-apt-repository ppa:openjdk-r/ppa
