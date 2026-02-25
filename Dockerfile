@@ -5,35 +5,36 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # ---- Pin package versions ----
 # Add 3rd party repositories
+
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    apt-utils=2.4.14 \
+    apt-utils \
     gpg \
     gpg-agent \
-    ca-certificates=20240203~22.04.1 \
-    software-properties-common=0.99.22.9 \
+    ca-certificates \
+    software-properties-common \
     && add-apt-repository ppa:openjdk-r/ppa
 
 # Install necessary packages
 RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
-    build-essential=12.9ubuntu3 \
-    curl=7.81.0-1ubuntu1.21 \
-    wget=1.21.2-2ubuntu1.1 \
-    git=1:2.34.1-1ubuntu1.15 \
-    python3=3.10.6-1~22.04.1 \
-    python3-pip=22.0.2+dfsg-1ubuntu0.7 \
-    libpcre2-dev=10.39-3ubuntu0.1 \
-    make=4.3-4.1build1 \
-    ninja-build=1.10.1-1 \
-    unzip=6.0-26ubuntu3.2 \
-    bzip2=1.0.8-5build1 \
-    xz-utils=5.2.5-2ubuntu1 \
-    tar=1.34+dfsg-1ubuntu0.1.22.04.2 \
-    libncurses5=6.3-2ubuntu0.1 \
-    libncursesw5=6.3-2ubuntu0.1 \
-    libtinfo5=6.3-2ubuntu0.1 \
-    libusb-1.0-0=2:1.0.25-1ubuntu2 \
-    libgtk-3-0=3.24.33-1ubuntu2.2 \
-    rsync=3.2.7-0ubuntu0.22.04.4 \
+    build-essential \
+    curl \
+    wget \
+    git \
+    python3 \
+    python3-pip \
+    libpcre2-dev \
+    make \
+    ninja-build \
+    unzip \
+    bzip2 \
+    xz-utils \
+    tar \
+    libncurses5 \
+    libncursesw5 \
+    libtinfo5 \
+    libusb-1.0-0 \
+    libgtk-3-0 \
+    rsync \
     && rm -rf /var/lib/apt/lists/*
 
 # Install latest CMake from Kitware APT repository, verify via SHA256
