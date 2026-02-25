@@ -5,7 +5,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # ---- Pin package versions ----
 # Add 3rd party repositories
-# gpg/gpg-agent: not pinned — exact versions removed from Ubuntu repos over time
 RUN apt-get update && apt-get install --no-install-recommends -y \
     apt-utils=2.4.14 \
     gpg \
