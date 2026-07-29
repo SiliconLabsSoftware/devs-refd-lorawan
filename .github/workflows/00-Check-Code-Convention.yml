@@ -37,8 +37,21 @@ jobs:
         run: |
           echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
           echo "Current commit: $(git rev-parse HEAD)"
+      # Workaround: coding-convention-tool image lacks python3-six, which causes
+      # ModuleNotFoundError: No module named 'six'. Patch until upstream adds it.
+      - name: Checkout coding convention tool
+        uses: actions/checkout@v4.1.7
+        with:
+          repository: SiliconLabsSoftware/devs-coding-convention-tool
+          ref: master
+          path: .github/coding-convention-tool
+      - name: Ensure python3-six in coding convention image
+        run: |
+          sed -i 's/python3 python3-pip python3-venv \\/python3 python3-pip python3-venv python3-six \\/' \
+            .github/coding-convention-tool/Dockerfile
+          grep -q 'python3-six' .github/coding-convention-tool/Dockerfile
       - name: Check Code Convention
-        uses: SiliconLabsSoftware/devs-coding-convention-tool@master
+        uses: ./.github/coding-convention-tool
         with:
           exclude-regex: '.*\/build\/.*|.*\/gecko_sdk.*/.*|.*\/autogen\/.*|.*simplicity.*/.*|.*\/config\/.*|.*\.slcp|.*\.slps|.*\.mak|.*\.github'
           codespell-ignore-words: ""
