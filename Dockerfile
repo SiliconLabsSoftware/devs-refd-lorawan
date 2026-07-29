@@ -40,7 +40,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
 
 # Install latest CMake from Kitware APT repository, verify via SHA256
 ARG KITWARE_URL="https://apt.kitware.com/kitware-archive.sh"
-ARG KITWARE_SHA256="4c16054d0a4808c9871e347dd1b10c1e4bbd3880b31235c06d6be91f86f4bf8f"
+ARG KITWARE_SHA256="f1a7bfa80db45707dde9ab4c24073b6723ceca3688e04f7f281bd5e3a7ec8ebe"
 RUN curl -fsSL -o /tmp/kitware-archive.sh $KITWARE_URL \
     && echo "$KITWARE_SHA256  /tmp/kitware-archive.sh" | sha256sum -c - \
     && bash /tmp/kitware-archive.sh \
