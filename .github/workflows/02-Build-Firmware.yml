@@ -1,0 +1,70 @@
+name: 02-Build-Firmware
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+      - "release/**"
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branches to run the workflow on'
+        required: true
+        default: 'main'
+
+jobs:
+  FW_build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          submodules: false
+          fetch-depth: 0
+          ref: "${{ github.event_name == 'workflow_dispatch' && github.event.inputs.branch || github.ref }}"
+
+      - name: Build Docker Image
+        run: docker build -t ${{ github.repository }}-build-env:latest .
+
+      - name: Build all EFR32 board firmware
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace \
+            ${{ github.repository }}-build-env:latest /bin/bash -c '
+              set -e
+              SWL2001_APP_DIR="lbm_applications/4_porting_efr32"
+              BOARDS="brd4405a brd4400c brd4187c xiao_mg24"
+              APPS="PERIODICAL_UPLINK PORTING_TESTS LCTT_CERTIF PING_PONG"
+
+              build() {
+                local board="$1"
+                local app="$2"
+                local ping_pong_role="${3:-}"
+
+                if [ "$board" = "xiao_mg24" ] && [ "$app" = "PING_PONG" ] && [ -z "$ping_pong_role" ]; then
+                  echo "==> Building [$board] $app (PING + PONG)"
+                  build "$board" "$app" PING
+                  build "$board" "$app" PONG
+                  return
+                fi
+
+                if [ -n "$ping_pong_role" ]; then
+                  echo "==> Building [$board] $app role=$ping_pong_role"
+                  make -C "$SWL2001_APP_DIR" sx1262 BOARD="$board" MODEM_APP="$app" PING_PONG_ROLE="$ping_pong_role"
+                else
+                  echo "==> Building [$board] $app"
+                  make -C "$SWL2001_APP_DIR" sx1262 BOARD="$board" MODEM_APP="$app"
+                fi
+              }
+
+              for board in $BOARDS; do
+                for app in $APPS; do
+                  build "$board" "$app"
+                done
+              done
+            '
+
+      - name: Clean up workspace
+        if: always()
+        run: |
+          sudo git clean -ffdx
+          sudo git submodule foreach --recursive 'git clean -ffdx'
