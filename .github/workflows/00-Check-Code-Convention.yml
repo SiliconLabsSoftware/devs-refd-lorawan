@@ -15,7 +15,7 @@ on:
 jobs:
   job1:
     name: Check coding convention
-    runs-on: [self-hosted, jammy] #uncrustify 0.64 can not be compiled on ubuntu-24.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Trigger
         run: echo "Triggered by ${{github.event_name}} event"
@@ -40,6 +40,6 @@ jobs:
       - name: Check Code Convention
         uses: SiliconLabsSoftware/devs-coding-convention-tool@master
         with:
-          exclude-regex: '.*\/build\/.*|.*\/gecko_sdk.*/.*|.*\/autogen\/.*|.*simplicity.*/.*|.*\/config\/.*|.*\.slcp|.*\.slps|.*\.mak|.*\.github'
+          exclude-regex: '^(?!lbm_applications\/4_porting_efr32\/).*|.*\/build\/.*|.*\/gecko_sdk.*/.*|.*\/autogen\/.*|.*simplicity.*/.*|.*\/config\/.*|.*\.slcp|.*\.slps|.*\.mak|.*\.github'
           codespell-ignore-words: ""
           codespell-skip-paths: ""

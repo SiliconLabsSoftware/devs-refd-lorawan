@@ -37,16 +37,15 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
     rsync \
     && rm -rf /var/lib/apt/lists/*
 
-# Install latest CMake from Kitware APT repository, verify via SHA256
-ARG KITWARE_URL="https://apt.kitware.com/kitware-archive.sh"
-ARG KITWARE_SHA256="4c16054d0a4808c9871e347dd1b10c1e4bbd3880b31235c06d6be91f86f4bf8f"
-RUN curl -fsSL -o /tmp/kitware-archive.sh $KITWARE_URL \
-    && echo "$KITWARE_SHA256  /tmp/kitware-archive.sh" | sha256sum -c - \
-    && bash /tmp/kitware-archive.sh \
-    && apt-get update \
-    && apt-get install -y cmake \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm /tmp/kitware-archive.sh
+# Install pinned CMake release from GitHub, verify via SHA256
+ARG CMAKE_VERSION="3.28.3"
+ARG CMAKE_URL="https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz"
+ARG CMAKE_SHA256="804d231460ab3c8b556a42d2660af4ac7a0e21c98a7f8ee3318a74b4a9a187a6"
+RUN curl -fsSL -o /tmp/cmake.tar.gz "$CMAKE_URL" \
+    && echo "$CMAKE_SHA256  /tmp/cmake.tar.gz" | sha256sum -c - \
+    && tar -xf /tmp/cmake.tar.gz -C /opt \
+    && ln -sf /opt/cmake-${CMAKE_VERSION}-linux-x86_64/bin/* /usr/local/bin/ \
+    && rm /tmp/cmake.tar.gz
 
 # Download & install GNU Arm Embedded Toolchain, verify via SHA256
 ARG ARM_GCC_URL="https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz"
