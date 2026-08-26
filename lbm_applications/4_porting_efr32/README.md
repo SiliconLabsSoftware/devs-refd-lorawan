@@ -8,7 +8,7 @@ This folder contains a LoRa Basics Modem (LBM) port for Silicon Labs EFR32 devic
 
 | Board | MCU | Radio |
 |---|---|---|
-| `brd4405a` (default) | EFR32ZG28B312F1024IM68 | On-board SX1262 + SP3T RF switch |
+| `brd4405a` (default) | EFR32FG28B320F1024IM48 | On-board SX1262 + SP3T RF switch |
 | `brd4400c` | EFR32ZG28B322 (xG28 Pro Kit) | SX1262 via BRD8042A adapter |
 | `brd4187c` | EFR32MG24 (xG24 Pro Kit) | SX1262 via BRD8042A adapter |
 | `xiao_mg24` | EFR32MG24 (Seeed XIAO MG24) | Wio-SX1262 shield |
