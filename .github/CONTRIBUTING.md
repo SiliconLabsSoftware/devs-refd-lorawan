@@ -51,7 +51,6 @@ What to consider when raising a Pull Request:
    - **[Coding Convention Check](workflows/00-Check-Code-Convention.yml)**: Analyzes the code formatting and fails if any rules are broken.
    - **[Firmware Build](workflows/02-Build-Firmware.yml)**: Builds the firmware inside the [Dockerfile](../Dockerfile).  
    - **[Secret Scanner](workflows/04-TruffleHog-Security-Scan.yml)**: Runs the TruffleHog security scanner to look for API keys and committed secrets.
-   - **[SonarQube Analysis](workflows/zz-sonarqube-analysis.yml)**: Runs SonarQube analysis on the project. Refer to the related [Confluence page](https://confluence.silabs.com/display/IoTApps/SQA+-+SonarQube+howTo).
 
 ### As a Reviewer
 
