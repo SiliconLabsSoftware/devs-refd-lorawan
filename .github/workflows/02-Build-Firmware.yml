@@ -1,0 +1,53 @@
+name: 02-Build-Firmware
+## By default this workflow runs on Github hosted runners. This is not free for internal and private repositories
+## It is recommended to run this job on a self-hosted runner for non public repository
+## Uncomment the needed runs-on command.
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+      - "release/**"
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branches to run the workflow on'
+        required: true
+        default: 'main'
+
+jobs:
+  FW_build:
+    # Choose a runner type here by commenting out the not needed one.
+    # runs-on: ubuntu-24.04
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          submodules: false
+          fetch-depth: 0
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Build Docker Image
+        run: docker build -t ${{ github.repository }}-build-env:latest .
+
+      - name: Run Docker Container
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace \
+            ${{ github.repository }}-build-env:latest /bin/bash -c "make setup && make all"
+
+      - name: Save firmware artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-${{ github.run_number }}
+          path: |
+            artifacts/firmware/**/*.hex
+          if-no-files-found: error
+          retention-days: 5
+
+      - name: Clean up workspace
+        if: always()
+        run: |
+          sudo git clean -ffdx
+          sudo git submodule foreach --recursive 'git clean -ffdx'
