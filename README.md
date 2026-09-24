@@ -87,11 +87,12 @@ ninja flash
 
 ## Applications
 
-Under `lbm_applications` folder, there are 3 specific applications that are using the LoRa Basics Modem stack.
+Under `lbm_applications` folder, there are 4 specific applications that are using the LoRa Basics Modem stack.
 
 - A ThreadX Operating System running on STM32U5 ([lbm_applications/1_thread_x_on_stm32_u5/README.md](lbm_applications/1_thread_x_on_stm32_u5/README.md))
 - A LBM porting on Nordic NRF52840 ([lbm_applications/2_porting_nrf_52840/README.md](lbm_applications/2_porting_nrf_52840/README.md))  
 - A Geolocation application running on Lora Edge ([lbm_applications/3_geolocation_on_lora_edge/README.md](lbm_applications/3_geolocation_on_lora_edge/README.md))
+- A LBM porting on Silicon Labs EFR32 ([lbm_applications/4_porting_efr32/README.md](lbm_applications/4_porting_efr32/README.md))
 
 An integration in Zephyr OS is available in another repository, instructions to download this integration and LoRa Basics Modem
 are available at [LBM_Zephyr](https://github.com/Lora-net/LBM_Zephyr/blob/master/README.md).
